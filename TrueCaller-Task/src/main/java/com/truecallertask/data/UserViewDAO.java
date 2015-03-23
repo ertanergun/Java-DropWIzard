@@ -5,7 +5,6 @@ import com.truecallertask.core.UserView;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
-
 import java.util.List;
 
 public class UserViewDAO extends AbstractDAO<UserView> {
@@ -22,8 +21,7 @@ public class UserViewDAO extends AbstractDAO<UserView> {
     public List<UserView> findAll() {
         return list(namedQuery("com.truecallertask.core.UserView.findAll"));
     }
-    public List<UserView> getViewList(Long viewId)
-    {
+    public List<UserView> getViewList(Long viewId){
         return list(
                 namedQuery("com.truecallertask.core.UserView.getViewList")
                         .setParameter("dateLimit", DateTime.now().minusDays(10))

@@ -1,10 +1,7 @@
 package com.truecallertask.core;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import javax.persistence.*;
-import java.util.Date;
-
 
 @Entity
 @Table(name = "UserViews")
