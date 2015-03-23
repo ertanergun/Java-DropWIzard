@@ -1,7 +1,9 @@
 package com.truecallertask.core;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -10,37 +12,41 @@ import javax.persistence.*;
         @NamedQuery(
                 name = "com.truecallertask.core.UserView.findAll",
                 query = "SELECT u FROM UserView u"
+        ),
+        @NamedQuery(
+                name = "com.truecallertask.core.UserView.getViewList",
+                query = "SELECT u FROM UserView u WHERE u.viewedId=:viewedId AND u.viewDate >=:dateLimit ORDER BY u.viewDate"
         )
 })
 public class UserView {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="Id", nullable = false)
-    private long Id;
+    private Long id;
 
-
-
-    /*
-        @OneToOne(fetch = FetchType.LAZY)
-        @PrimaryKeyJoinColumn(name = "ViewerId", referencedColumnName = "Id")
-        private User Viewer;
-
-        @OneToOne(fetch = FetchType.LAZY)
-        @PrimaryKeyJoinColumn(name = "ViewedId", referencedColumnName = "Id")
-        private User Viewed;
-    */
     @Column(name="ViewerId", nullable = false)
-    private long viewerId;
+    private Long viewerId;
 
     @Column(name="ViewedId", nullable = false)
     private long viewedId;
+
+    @Column(name = "ViewDate", nullable = false)
+    private DateTime viewDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public long getViewerId() {
         return viewerId;
     }
 
-    public void setViewerId(long viewerId) {
+    public void setViewerId(Long viewerId) {
         this.viewerId = viewerId;
     }
 
@@ -48,46 +54,25 @@ public class UserView {
         return viewedId;
     }
 
-    public void setViewedId(long viewedId) {
+    public void setViewedId(Long viewedId) {
         this.viewedId = viewedId;
     }
 
-
-
-    @Column(name = "ViewDate", nullable = false)
-    private DateTime ViewDate;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-/*
-    public User getViewer() {
-        return Viewer;
-    }
-
-    public void setViewer(User viewer) {
-        Viewer = viewer;
-    }
-
-    public User getViewed() {
-        return Viewed;
-    }
-
-    public void setViewed(User viewed) {
-        Viewed = viewed;
-    }
-*/
     public DateTime getViewDate() {
-        return ViewDate;
+        return viewDate;
     }
 
     public void setViewDate(DateTime viewDate) {
-        ViewDate = viewDate;
+        this.viewDate = viewDate;
     }
 
+    public UserView()
+    {}
 
+    public UserView(Long viewerId, Long viewedId, DateTime viewDate)
+    {
+        this.viewerId = viewerId;
+        this.viewedId = viewedId;
+        this.viewDate = viewDate;
+    }
 }
