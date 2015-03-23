@@ -53,7 +53,7 @@ public class TrueCallerApplication extends Application<TrueCallerApplicationConf
     @Override
     public void run(TrueCallerApplicationConfiguration trueCallerApplicationConfiguration, Environment environment) throws Exception {
 
-        final UserViewDAO userViewDAO =  new UserViewDAO(hibernateUserViewBundle.getSessionFactory()); //jdbi.onDemand(UserViewDAO.class);
+        final UserViewDAO userViewDAO =  new UserViewDAO(hibernateUserViewBundle.getSessionFactory());
         environment.jersey().register(new UserViewResource(userViewDAO));
     }
 }
