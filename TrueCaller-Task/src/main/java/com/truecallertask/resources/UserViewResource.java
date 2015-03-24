@@ -33,7 +33,7 @@ public class UserViewResource {
         {
             UserView userView = new UserView(viewerId,viewedId, DateTime.now());
             this.userViewDAO.create(userView);
-            String message = String.format("User with Id: %d is view the User with id: %d on %s",userView.getViewerId(),userView.getViewedId(), userView.getViewDate().toString());
+            String message = String.format("User with Id: %d is viewing the User with id: %d on %s",userView.getViewerId(),userView.getViewedId(), userView.getViewDate().toString());
             builder.append(message);
         }
         catch (Exception ex)
@@ -62,7 +62,7 @@ public class UserViewResource {
             }
 
             for (int i = 0; i < viewList.size(); i++) {
-                String row = String.format("User with Id: %d is view the User with id: %d on %s %n",viewList.get(i).getViewerId(),viewList.get(i).getViewedId(), viewList.get(i).getViewDate().toString());
+                String row = String.format("User with Id: %d was viewed the User with id: %d on %s %n",viewList.get(i).getViewerId(),viewList.get(i).getViewedId(), viewList.get(i).getViewDate().toString());
                 builder.append(row);
             }
         }
